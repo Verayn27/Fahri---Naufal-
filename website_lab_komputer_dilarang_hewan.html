@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peraturan Lab Komputer — Dilarang Membawa Hewan</title>
+<style>
+  :root{
+    --navy:#17304f;
+    --blue:#2f70bd;
+    --light:#eef7ff;
+    --green:#20a56b;
+    --green-bg:#effbf5;
+    --red:#e84f55;
+    --red-bg:#fff1f2;
+    --text:#20344d;
+    --muted:#61748a;
+    --white:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--text);
+    background:#f7fbff;
+    line-height:1.6;
+  }
+  nav{
+    position:sticky;top:0;z-index:10;
+    background:var(--navy);color:white;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:15px 6%;
+    box-shadow:0 3px 15px #0002;
+  }
+  .brand{font-size:1.25rem;font-weight:800;display:flex;gap:10px;align-items:center}
+  .brand span{font-size:1.7rem}
+  nav a{color:#dcecff;text-decoration:none;margin-left:25px;font-weight:600}
+  nav a:hover{color:#72c5ff}
+  .hero{
+    min-height:430px;
+    display:flex;align-items:center;
+    padding:55px 7%;
+    background:linear-gradient(120deg,#eaf6ff,#fff);
+    position:relative;overflow:hidden;
+  }
+  .hero:after{
+    content:"";position:absolute;width:480px;height:480px;border-radius:50%;
+    background:#d9edff;right:-160px;top:-170px;opacity:.65;
+  }
+  .ban{
+    width:210px;height:210px;border:18px solid #ed3037;border-radius:50%;
+    display:grid;place-items:center;background:white;
+    margin-right:55px;position:relative;z-index:1;
+    box-shadow:0 10px 30px #23466a22;
+  }
+  .ban:before{
+    content:"🐶 🐱";font-size:70px;letter-spacing:-18px;
+  }
+  .hero-content{max-width:760px;position:relative;z-index:1}
+  .eyebrow{color:var(--blue);font-weight:800;letter-spacing:1px;font-size:1.05rem}
+  h1{font-size:clamp(2.1rem,5vw,4.3rem);line-height:1.05;margin:8px 0 18px;color:var(--navy)}
+  .hero p{font-size:1.15rem;color:var(--muted);max-width:690px}
+  .notice{
+    margin-top:22px;display:inline-block;background:#fff1f1;color:#b51f28;
+    padding:10px 16px;border-radius:12px;font-weight:700;
+  }
+  section{padding:55px 7%}
+  .section-title{text-align:center;font-size:2rem;color:var(--navy);margin-bottom:12px}
+  .section-sub{text-align:center;color:var(--muted);max-width:720px;margin:0 auto 30px}
+  .reasons{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:25px
+  }
+  .reason{
+    background:white;border:1px solid #dceaf6;border-radius:18px;padding:25px;
+    box-shadow:0 8px 25px #22466b0c;
+  }
+  .icon{font-size:2rem;margin-bottom:8px}
+  .reason h3{font-size:1.05rem;margin-bottom:5px}
+  .reason p{font-size:.93rem;color:var(--muted)}
+  .examples{
+    display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-top:35px
+  }
+  .panel{background:white;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px #1e42630e}
+  .panel-head{padding:17px 23px;color:white;font-size:1.35rem;font-weight:800;display:flex;align-items:center;gap:10px}
+  .correct .panel-head{background:var(--green)}
+  .wrong .panel-head{background:var(--red)}
+  .badge{
+    width:36px;height:36px;border-radius:50%;background:white;display:grid;place-items:center;
+    color:inherit;font-size:1.5rem;font-weight:900;
+  }
+  .correct .badge{color:var(--green)}
+  .wrong .badge{color:var(--red)}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:18px}
+  .card{border:1px solid #dfe8ef;border-radius:14px;overflow:hidden;background:#fff}
+  .visual{height:155px;display:grid;place-items:center;font-size:5rem;background:#f1f8ff}
+  .correct .visual{background:#ecfbf4}
+  .wrong .visual{background:#fff0f1}
+  .card-body{padding:16px}
+  .card-body h3{font-size:1.05rem;margin-bottom:6px}
+  .card-body p{font-size:.9rem;color:var(--muted)}
+  .label{font-weight:800;display:inline-flex;align-items:center;gap:5px;margin-bottom:6px}
+  .correct .label{color:var(--green)}
+  .wrong .label{color:var(--red)}
+  .rule{
+    margin:45px auto 0;max-width:850px;background:var(--navy);color:white;
+    border-radius:20px;padding:28px 32px;text-align:center;
+  }
+  .rule strong{color:#7dccff}
+  footer{background:var(--navy);color:#d9e7f5;text-align:center;padding:30px 7%;margin-top:10px}
+  footer strong{color:white}
+  .top{display:inline-block;margin-top:12px;color:#7dccff;text-decoration:none}
+  @media(max-width:850px){
+    nav{padding:13px 5%}
+    nav div:last-child{display:none}
+    .hero{flex-direction:column;text-align:center;padding:45px 6%}
+    .ban{margin:0 0 30px;width:165px;height:165px;border-width:13px}
+    .ban:before{font-size:52px}
+    .reasons{grid-template-columns:1fr 1fr}
+    .examples{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    .reasons,.cards{grid-template-columns:1fr}
+    .hero{min-height:auto}
+    section{padding:42px 5%}
+    .hero p{font-size:1rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><span>🖥️</span> Lab Komputer</div>
+  <div>
+    <a href="#aturan">Peraturan</a>
+    <a href="#contoh">Contoh</a>
+    <a href="#pengingat">Pengingat</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="ban" aria-label="Dilarang membawa hewan"></div>
+  <div class="hero-content">
+    <div class="eyebrow">PERATURAN LABORATORIUM</div>
+    <h1>Dilarang Membawa Hewan Peliharaan</h1>
+    <p>Hewan peliharaan tidak diperbolehkan masuk ke dalam laboratorium komputer demi menjaga kebersihan, keamanan, dan kenyamanan seluruh pengguna.</p>
+    <div class="notice">🚫 Jangan membawa hewan masuk ke area lab.</div>
+  </div>
+</header>
+
+<section id="aturan">
+  <h2 class="section-title">Mengapa Aturan Ini Penting?</h2>
+  <p class="section-sub">Laboratorium komputer adalah fasilitas bersama. Ikuti aturan agar kegiatan belajar tetap aman dan nyaman.</p>
+  <div class="reasons">
+    <div class="reason"><div class="icon">🧹</div><h3>Menjaga Kebersihan</h3><p>Mencegah bulu, kotoran, dan sisa makanan mengotori ruangan.</p></div>
+    <div class="reason"><div class="icon">🛡️</div><h3>Menjaga Keamanan</h3><p>Mengurangi risiko hewan mengganggu pengguna atau aktivitas belajar.</p></div>
+    <div class="reason"><div class="icon">💻</div><h3>Melindungi Perangkat</h3><p>Menjauhkan komputer, kabel, dan fasilitas lab dari potensi kerusakan.</p></div>
+    <div class="reason"><div class="icon">😊</div><h3>Kenyamanan Bersama</h3><p>Menghargai pengguna yang mungkin takut atau alergi terhadap hewan.</p></div>
+  </div>
+</section>
+
+<section id="contoh">
+  <h2 class="section-title">Contoh Perilaku</h2>
+  <p class="section-sub">Perhatikan perbedaan tindakan yang benar dan yang tidak boleh dilakukan.</p>
+
+  <div class="examples">
+    <div class="panel correct">
+      <div class="panel-head"><span class="badge">✓</span> Contoh yang Benar</div>
+      <div class="cards">
+        <article class="card">
+          <div class="visual">🚪🐕</div>
+          <div class="card-body">
+            <div class="label">✓ BENAR</div>
+            <h3>Meninggalkan hewan di luar lab</h3>
+            <p>Jika membawa hewan, pastikan hewan tidak masuk ke area laboratorium.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="visual">🐱🧺</div>
+          <div class="card-body">
+            <div class="label">✓ BENAR</div>
+            <h3>Menitipkan hewan dengan aman</h3>
+            <p>Gunakan tempat penitipan hewan yang sesuai dan aman, jika tersedia.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="panel wrong">
+      <div class="panel-head"><span class="badge">✕</span> Contoh yang Salah</div>
+      <div class="cards">
+        <article class="card">
+          <div class="visual">🧑🐱💻</div>
+          <div class="card-body">
+            <div class="label">✕ SALAH</div>
+            <h3>Membawa hewan masuk ke lab</h3>
+            <p>Jangan membawa hewan peliharaan masuk, meskipun hanya sebentar.</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="visual">🐕💻⚠️</div>
+          <div class="card-body">
+            <div class="label">✕ SALAH</div>
+            <h3>Membiarkan hewan berkeliaran</h3>
+            <p>Hewan dapat mengganggu pengguna dan berisiko merusak fasilitas lab.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" id="pengingat">
+    <div style="font-size:2rem">📢</div>
+    <p><strong>INGAT!</strong> Lab komputer adalah fasilitas bersama.</p>
+    <p>Jangan membawa hewan peliharaan ke dalam lab. Mari menjaga kebersihan, keamanan, dan kenyamanan bersama.</p>
+  </div>
+</section>
+
+<footer>
+  <strong>🖥️ LAB KOMPUTER</strong>
+  <p>Patuh pada peraturan • Jaga fasilitas • Utamakan keselamatan</p>
+  <a class="top" href="#">↑ Kembali ke atas</a>
+</footer>
+
+</body>
+</html>
